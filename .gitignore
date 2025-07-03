@@ -38,5 +38,5 @@ build/
 .DS_Storenode_modules/
 
 ### Node ###
-node_modules/
 ui/node_modules/
+ui/.next
