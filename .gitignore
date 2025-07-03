@@ -36,3 +36,4 @@ build/
 
 ### Mac OS ###
 .DS_Storenode_modules/
+ui/node_modules/
