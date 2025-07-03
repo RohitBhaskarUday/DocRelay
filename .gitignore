@@ -40,3 +40,7 @@ build/
 ### Node ###
 ui/node_modules/
 ui/.next
+
+# Node
+node_modules/
+ui/node_modules/
