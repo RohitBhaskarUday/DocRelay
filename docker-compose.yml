@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile.backend
     ports:
       - "9000:9000"
-    #Expose the dynamic port range for P2P file sharing
+    #Expose the dynamic port range for DocRelay file sharing
     expose:
       - "49152-65535:49152-65535"
     # For production, you might want to add port mappings for the dynamic ports

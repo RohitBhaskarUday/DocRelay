@@ -1,6 +1,6 @@
-# PeerLink UI
+# DocRelay UI
 
-This is the frontend UI for the PeerLink P2P file sharing application. It's built with Next.js, TypeScript, and Tailwind CSS.
+This is the frontend UI for the DocRelay file sharing application. It's built with Next.js, TypeScript, and Tailwind CSS.
 
 ## Features
 
@@ -66,7 +66,7 @@ To start the backend server:
 ```bash
 cd ..  # Go back to the project root
 mvn clean package
-java -jar target/p2p-1.0-SNAPSHOT.jar
+java -jar target/docrelay-1.0-SNAPSHOT.jar
 ```
 
 ## Project Structure
