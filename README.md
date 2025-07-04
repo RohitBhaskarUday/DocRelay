@@ -45,15 +45,15 @@ npm run dev                  # http://localhost:3000
 
 ## How it works
 ### File Upload:
-User uploads a file through the UI
-The file is sent to the Java backend
-The backend assigns a unique port number (invite code)
-The backend starts a file server on that port
+- User uploads a file through the UI
+- The file is sent to the Java backend
+- The backend assigns a unique port number (invite code)
+- The backend starts a file server on that port
 
 ### File Sharing:
-The user shares the invite code with another user
-The other user enters the invite code in their UI
+- The user shares the invite code with another user
+- The other user enters the invite code in their UI
 
 ### File Download:
-The UI connects to the specified port
-The file is transferred directly from the host to the recipient
+- The UI connects to the specified port
+- The file is transferred directly from the host to the recipient
