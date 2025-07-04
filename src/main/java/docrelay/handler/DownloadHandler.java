@@ -46,6 +46,8 @@ public class DownloadHandler implements HttpHandler {
                 try(FileOutputStream fileOutputStream = new FileOutputStream(tempFile)){
 
                     byte[] buffer = new byte[4096];
+                    int byteRead;
+
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
                     int byteNormal;
@@ -59,8 +61,7 @@ public class DownloadHandler implements HttpHandler {
                         fileName = header.substring("Filename: ".length());
                     }
 
-                    int byteRead;
-                    while((byteRead = inputStream.read())!= -1){
+                    while((byteRead = inputStream.read(buffer))!= -1){
                         fileOutputStream.write(buffer, 0, byteRead);
                     }
 
@@ -68,8 +69,8 @@ public class DownloadHandler implements HttpHandler {
                 //placing everything into the buffer
                 headers.add("Content-Disposition", "attachment; filename=\"" + fileName+"\"");
                 headers.add("Content-Type", "application/octet-stream");
-                exchange.sendResponseHeaders(200, tempFile.length());
 
+                exchange.sendResponseHeaders(200, tempFile.length());
                 try(OutputStream outputStream = exchange.getResponseBody()){
                     try( FileInputStream fileInputStream = new FileInputStream(tempFile)){
                         byte[] bufferStore = new byte[4096];
