@@ -38,8 +38,8 @@ sudo apt install -y maven
 
 # Clone repository (uncomment and modify if using Git)
 # echo "Cloning repository..."
-git clone https://github.com/RohitBhaskarUday/DocRelay
-cd DocRelay
+#git clone https://github.com/RohitBhaskarUday/DocRelay
+#cd DocRelay
 
 # Build backend
 echo "Building Java backend..."
