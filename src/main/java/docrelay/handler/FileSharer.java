@@ -18,12 +18,11 @@ public class FileSharer {
         availableFiles = new HashMap<>();
     }
 
-    public int offerFile(String filePath){
+    public synchronized int offerFile(String filePath){
         int port;
-
         while(true){
             port = UploadCode.generateCode();
-            if(availableFiles.containsKey(port)){
+            if(!availableFiles.containsKey(port)){
                 availableFiles.put(port, filePath);
                 return port;
             }

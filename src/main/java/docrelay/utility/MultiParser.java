@@ -21,6 +21,7 @@ public class MultiParser {
             if(fileNameStartIndex  == -1){
                 return null;
             }
+            fileNameStartIndex+=fileNameMarker.length();
             int fileNameEndIndex = dataAsString.indexOf("\"", fileNameStartIndex);
             String fileName = dataAsString.substring(fileNameStartIndex, fileNameEndIndex);
 

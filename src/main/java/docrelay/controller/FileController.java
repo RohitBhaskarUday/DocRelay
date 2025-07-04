@@ -72,12 +72,12 @@ public class FileController {
          */
         @Override
         public void handle(HttpExchange exchange) throws IOException {
-            Headers headers = exchange.getRequestHeaders();
+            Headers headers = exchange.getResponseHeaders();
             headers.add("Access-Control-Allow-Origin","*");
             headers.add("Access-Control-Allow-Methods","GET, POST, OPTIONS");
             headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
-            if(exchange.getRequestHeaders().equals("OPTIONS")){
+            if(exchange.getRequestMethod().equalsIgnoreCase("OPTIONS")){
                 exchange.sendResponseHeaders(204, -1);
                 return;
             }

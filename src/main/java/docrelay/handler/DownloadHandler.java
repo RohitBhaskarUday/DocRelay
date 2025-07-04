@@ -20,6 +20,7 @@ public class DownloadHandler implements HttpHandler {
      */
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+
         Headers headers = exchange.getResponseHeaders();
         headers.add("Access-Control-Allow-Origin","*");
 
@@ -33,9 +34,10 @@ public class DownloadHandler implements HttpHandler {
         }
 
         String path = exchange.getRequestURI().getPath();
-        String portString = path.substring(path.lastIndexOf('/'+1));
+        String portString = path.substring(path.lastIndexOf('/')+1);
         try{
             int port = Integer.parseInt(portString);
+
             //reading the file
             try(Socket socket = new Socket("localhost", port)){
                 InputStream inputStream = socket.getInputStream();
@@ -46,35 +48,34 @@ public class DownloadHandler implements HttpHandler {
                     byte[] buffer = new byte[4096];
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-                    int byteNormal = inputStream.read();
-                    while (byteNormal !=-1){
+                    int byteNormal;
+                    while ((byteNormal = inputStream.read()) !=-1){
                         if(byteNormal =='\n') break;
                         byteArrayOutputStream.write(byteNormal);
-                        byteNormal =inputStream.read();
-                    }
-                    String header = byteArrayOutputStream.toString().trim();
-                    if(header.startsWith("Filename: ")){
-                        fileName = header.substring("Filename ".length());
                     }
 
-                    int byteRead= inputStream.read();
-                    while(byteRead!= -1){
+                    String header = byteArrayOutputStream.toString().trim();
+                    if(header.startsWith("Filename: ")){
+                        fileName = header.substring("Filename: ".length());
+                    }
+
+                    int byteRead;
+                    while((byteRead = inputStream.read())!= -1){
                         fileOutputStream.write(buffer, 0, byteRead);
-                        byteRead = inputStream.read();
                     }
 
                 }
                 //placing everything into the buffer
-                headers.add("Content-Disposition: ", "attachment; filename=\"" + fileName+"\"");
+                headers.add("Content-Disposition", "attachment; filename=\"" + fileName+"\"");
                 headers.add("Content-Type", "application/octet-stream");
                 exchange.sendResponseHeaders(200, tempFile.length());
+
                 try(OutputStream outputStream = exchange.getResponseBody()){
                     try( FileInputStream fileInputStream = new FileInputStream(tempFile)){
                         byte[] bufferStore = new byte[4096];
-                        int bytesRead=fileInputStream.read(bufferStore);
-                        while(bytesRead!=-1){
+                        int bytesRead;
+                        while((bytesRead=fileInputStream.read(bufferStore))!=-1){
                             outputStream.write(bufferStore, 0, bytesRead);
-                            bytesRead=fileInputStream.read(bufferStore);
                         }
                     }
                 }
