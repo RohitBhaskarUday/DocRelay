@@ -6,11 +6,11 @@ const nextConfig = {
     return [
       {
         source: '/api/upload',
-        destination: 'http://localhost:8080/upload',
+        destination: 'http://localhost:9000/upload',
       },
       {
         source: '/api/download/:port',
-        destination: 'http://localhost:8080/download/:port',
+        destination: 'http://localhost:9000/download/:port',
       },
     ];
   },

@@ -38,7 +38,8 @@ sudo apt install -y maven
 
 # Clone repository (uncomment and modify if using Git)
 # echo "Cloning repository..."
-# cd peerlink
+git clone https://github.com/RohitBhaskarUday/DocRelay
+cd docrelay
 
 # Build backend
 echo "Building Java backend..."
@@ -120,8 +121,8 @@ fi
 # Start backend with PM2
 echo "Starting backend with PM2..."
 # Ensure all dependencies are in the classpath
-CLASSPATH="target/p2p-1.0-SNAPSHOT.jar:$(mvn dependency:build-classpath -DincludeScope=runtime -Dmdep.outputFile=/dev/stdout -q)"
-pm2 start --name docrelay-backend java -- -cp "$CLASSPATH" p2p.App
+CLASSPATH="target/docrelay-1.0-SNAPSHOT.jar:$(mvn dependency:build-classpath -DincludeScope=runtime -Dmdep.outputFile=/dev/stdout -q)"
+pm2 start --name docrelay-backend java -- -cp "$CLASSPATH" docrelay.App
 
 # Start frontend with PM2
 echo "Starting frontend with PM2..."
